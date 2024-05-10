@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        body {
+            background-color: hsla(0, 7%, 21%, 0.717);
+            background-size: 50% 120%;
+        }
+
+        .calculator {
+            max-width: 250px;
+            min-height: 210px;
+            background-color: hsl(0, 4%, 19%);
+            border-radius: 10px;
+            filter: brightness(150%);
+            filter: sepia(50%);
+            filter: contrast(130%);
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            padding-bottom: 5px;
+        }
+
+        #display {
+            background-color: rgb(103 58 183 / 40%);
+            font-size: 2rem;
+            color: rgba(255, 255, 255, 0.836);
+            width: 88%;
+            height: 40px;
+            margin-left: 10px;
+            margin-top: 15px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            height: 230px;
+        }
+
+        button {
+            color: white;
+            cursor: pointer;
+            background-color: rgba(128, 128, 128, 0.847);
+            font-size: 1rem;
+            border-radius: 40%;
+            border: none;
+            width: 40px;
+            height: 35px;
+            margin-top: 8px;
+            margin-left: 11px;
+            padding: 5px 10px;
+        }
+
+        button:hover {
+            background-color: hsla(221, 14%, 30%, 0.817);
+        }
+
+        #clear {
+            color: black;
+            background-color: hsl(180, 79%, 77%);
+        }
+
+        #clear:hover {
+            background-color: hsl(180, 99%, 67%);
+        }
+
+        #result {
+            margin-right: 12px;
+            color: black;
+            background-color: hsla(146, 63%, 48%, 0.942);
+        }
+
+        #result:hover {
+            background-color: hsla(146, 93%, 48%);
+        }
+
+        .oprtr {
+            color: black;
+            background-color: hsla(24, 78%, 49%, 0.897);
+        }
+
+        .oprtr:hover {
+            background-color: hsla(24, 78%, 59%);
+        }
+
+        #del {
+            color: black;
+            background-color: hsl(0, 100%, 40%);
+            padding: 5px;
+        }
+
+        #del:hover {
+            background-color: hsl(0, 100%, 50%);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="calculator">
+        <input type="text" readonly id="display">
+        <div class="buttons">
+            <button onclick="showInDisplay('+')" class="oprtr">+</button>
+            <button onclick="showInDisplay('1')">1</button>
+            <button onclick="showInDisplay('2')">2</button>
+            <button onclick="showInDisplay('3')">3</button>
+            <button onclick="showInDisplay('-')" class="oprtr">-</button>
+            <button onclick="showInDisplay('4')">4</button>
+            <button onclick="showInDisplay('5')">5</button>
+            <button onclick="showInDisplay('6')">6</button>
+            <button onclick="showInDisplay('*')" class="oprtr">*</button>
+            <button onclick="showInDisplay('7')">7</button>
+            <button onclick="showInDisplay('8')">8</button>
+            <button onclick="showInDisplay('9')">9</button>
+            <button onclick="showInDisplay('/')" class="oprtr">/</button>
+            <button onclick="showInDisplay('0')">0</button>
+            <button onclick="showInDisplay('.')">.</button>
+            <button id="result">=</button>
+            <button id="clear">C</button>
+            <button id="del">DEL</button>
+        </div>
+    </div>
+
+    <script>
+        const screen = document.getElementById("display");
+        const clear = document.getElementById("clear");
+        const result = document.getElementById("result");
+        const del = document.getElementById("del");
+
+        function showInDisplay(input) {
+            screen.value += input;
+        }
+        clear.addEventListener("click", () => {
+            screen.value = "";
+        });
+        result.addEventListener("click", () => {
+            try {
+                screen.value = eval(screen.value);
+            }
+            catch (error) {
+                screen.value = "Error!!!";
+            }
+            setTimeout(() => {
+                screen.value = "";
+            }, 2500);
+        });
+        del.addEventListener("click", () => {
+            screen.value = screen.value.slice(0, -1);
+        });
+    </script>
+
+</body>
+
+</html>
